@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 export default function NavLink() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -22,23 +23,31 @@ export default function NavLink() {
   ];
 
   return (
-    <ul className="flex flex-col md:flex-row gap-5 justify-center p-2">
+    <ul className="flex flex-col md:flex-row gap-5 justify-center">
       <li>
-        <Link href={"/home"}>Home</Link>
+        <Link href={"/home"} className="hover:text-blue-500">
+          Home
+        </Link>
       </li>
       <li
         className="relative"
         onMouseEnter={() => setIsDropdownOpen(true)}
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
-        <Link href="/collection">Collection</Link>
+        <Link
+          href="/collection"
+          className="flex justify-between gap-2 items-center"
+        >
+          <span>Collection</span>
+          {isDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        </Link>
         {isDropdownOpen && (
-          <ul className="absolute top-full left-0 bg-white border w-40 mt-1 rounded shadow-lg z-10">
+          <ul className="md:absolute static top-full left-0 bg-white md:border w-full md:w-40 md:mt-0 mt-1 md:rounded md:shadow-lg z-10">
             {Dropdown.map((item) => (
               <li key={item.id}>
                 <Link
                   href={item.link}
-                  className="block px-4 py-2 hover:bg-gray-100"
+                  className="block md:px-4 py-2 hover:text-blue-500"
                 >
                   {item.title}
                 </Link>
@@ -48,11 +57,17 @@ export default function NavLink() {
         )}
       </li>
       <li>
-        <Link href={"/product"}>Product</Link>
+        <Link href={"/product"} className="hover:text-blue-500">
+          Product
+        </Link>
       </li>
-      <Link href={"/other-page"}>Other Page</Link>
+      <Link href={"/other-page"} className="hover:text-blue-500">
+        Other Page
+      </Link>
       <li>
-        <Link href={"/blog"}>Blog</Link>
+        <Link href={"/blog"} className="hover:text-blue-500">
+          Blog
+        </Link>
       </li>
     </ul>
   );
