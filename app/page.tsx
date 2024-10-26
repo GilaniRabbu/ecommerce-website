@@ -1,11 +1,11 @@
 import Header from "@/components/Header/Header";
-import TestSwiper from "@/components/Header/TestSwiper";
+import HeroSection from "@/components/Hero/Hero";
 
 export default function Home() {
   return (
     <main className="">
       <Header />
-      <TestSwiper />
+      <HeroSection />
     </main>
   );
 }
