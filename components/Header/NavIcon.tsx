@@ -18,7 +18,7 @@ export default function NavIcon() {
     <ul className="flex flex-row gap-5 justify-between md:justify-center p-0 md:p-2">
       {profileNav.map((i) => (
         <li key={i.id}>
-          <Link href={i.link} className="text-lg">
+          <Link href={i.link} className="text-lg hover:text-teal-500">
             {i.icon}
           </Link>
         </li>

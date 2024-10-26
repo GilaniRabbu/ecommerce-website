@@ -25,7 +25,7 @@ export default function NavLink() {
   return (
     <ul className="flex flex-col md:flex-row gap-5 justify-center">
       <li>
-        <Link href={"/home"} className="hover:text-blue-500">
+        <Link href={"/home"} className="hover:text-teal-500">
           Home
         </Link>
       </li>
@@ -36,7 +36,7 @@ export default function NavLink() {
       >
         <Link
           href="/collection"
-          className="flex justify-between gap-2 items-center"
+          className="flex justify-between gap-2 items-center hover:text-teal-500"
         >
           <span>Collection</span>
           {isDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -47,7 +47,7 @@ export default function NavLink() {
               <li key={item.id}>
                 <Link
                   href={item.link}
-                  className="block md:px-4 py-2 hover:text-blue-500"
+                  className="block md:px-4 py-2 hover:text-teal-500"
                 >
                   {item.title}
                 </Link>
@@ -57,15 +57,15 @@ export default function NavLink() {
         )}
       </li>
       <li>
-        <Link href={"/product"} className="hover:text-blue-500">
+        <Link href={"/product"} className="hover:text-teal-500">
           Product
         </Link>
       </li>
-      <Link href={"/other-page"} className="hover:text-blue-500">
+      <Link href={"/other-page"} className="hover:text-teal-500">
         Other Page
       </Link>
       <li>
-        <Link href={"/blog"} className="hover:text-blue-500">
+        <Link href={"/blog"} className="hover:text-teal-500">
           Blog
         </Link>
       </li>

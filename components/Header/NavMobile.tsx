@@ -21,7 +21,7 @@ export default function NavMobile() {
       </div>
       <div
         className={clsx(
-          "fixed h-full w-screen lg:hidden bg-black/60 backdrop-blur-sm top-0 right-0 -translate-x-full transition-all",
+          "fixed h-full w-screen lg:hidden z-50 bg-black/60 backdrop-blur-sm top-0 right-0 -translate-x-full transition-all",
           isMenuOpen && "translate-x-0"
         )}
       >

@@ -5,24 +5,26 @@ import NavMobile from "./NavMobile";
 
 export default function Header() {
   return (
-    <main className="container mx-auto">
-      <div className="flex flex-row justify-between items-center p-4">
-        <div>
-          <NavTitle />
-        </div>
+    <main className="shadow-lg bg-white">
+      <section className="container mx-auto">
+        <div className="flex flex-row justify-between items-center p-4">
+          <div>
+            <NavTitle />
+          </div>
 
-        <div className="md:block hidden">
-          <NavLink />
-        </div>
+          <div className="md:block hidden">
+            <NavLink />
+          </div>
 
-        <div className="md:block hidden">
-          <NavIcon />
-        </div>
+          <div className="md:block hidden">
+            <NavIcon />
+          </div>
 
-        <div className="md:hidden block">
-          <NavMobile />
+          <div className="md:hidden block">
+            <NavMobile />
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }
