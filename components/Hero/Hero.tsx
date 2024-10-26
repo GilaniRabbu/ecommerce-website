@@ -5,17 +5,17 @@ import Image from "next/image";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/autoplay";
-// import "swiper/css/pagination";
 
 // import required modules
 import { Autoplay } from "swiper/modules";
 
 const HeroSection = () => {
-  const swiperRef = useRef(null);
+  const swiperRef = useRef<SwiperCore | null>(null);
 
   const slides = [
     {
@@ -35,7 +35,9 @@ const HeroSection = () => {
   return (
     <>
       <Swiper
-        onSwiper={(swiper) => (swiperRef.current = swiper)}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
         onSlideChange={(swiper) => {
           document
             .querySelectorAll(".custom-bullet")
