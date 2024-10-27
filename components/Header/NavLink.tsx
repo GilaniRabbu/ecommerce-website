@@ -25,7 +25,7 @@ export default function NavLink() {
   return (
     <ul className="flex flex-col md:flex-row gap-5 justify-center">
       <li>
-        <Link href={"/home"} className="hover:text-teal-500">
+        <Link href={"/home"} className="transition-all hover:text-teal-500">
           Home
         </Link>
       </li>
@@ -34,7 +34,7 @@ export default function NavLink() {
         onMouseEnter={() => setIsDropdownOpen(true)}
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
-        <p className="flex cursor-pointer justify-between gap-2 items-center hover:text-teal-500">
+        <p className="flex cursor-pointer justify-between gap-2 items-center transition-all hover:text-teal-500">
           <span>Collection</span>
           {isDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </p>
@@ -44,7 +44,7 @@ export default function NavLink() {
               <li key={item.id}>
                 <Link
                   href={item.link}
-                  className="block md:px-4 py-2 hover:text-teal-500"
+                  className="block md:px-4 py-2 transition-all hover:text-teal-500"
                 >
                   {item.title}
                 </Link>
@@ -54,17 +54,20 @@ export default function NavLink() {
         )}
       </li>
       <li>
-        <Link href={"/product"} className="hover:text-teal-500">
+        <Link href={"/product"} className="transition-all hover:text-teal-500">
           Product
         </Link>
       </li>
       <li>
-        <Link href={"/other-page"} className="hover:text-teal-500">
+        <Link
+          href={"/other-page"}
+          className="transition-all hover:text-teal-500"
+        >
           Other Page
         </Link>
       </li>
       <li>
-        <Link href={"/blog"} className="hover:text-teal-500">
+        <Link href={"/blog"} className="transition-all hover:text-teal-500">
           Blog
         </Link>
       </li>

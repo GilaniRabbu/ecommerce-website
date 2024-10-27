@@ -53,13 +53,13 @@ const HeroSection = () => {
           <SwiperSlide key={index}>
             <section className="h-full py-10 flex flex-col md:flex-row gap-10 justify-center items-center">
               <div className="w-3/4 md:w-1/3 p-4">
-                <p className="text-gray-400">
+                <p className="text-gray-500">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit
                 </p>
                 <h1 className="text-2xl md:text-5xl font-bold mt-5">
                   {slide.text}
                 </h1>
-                <button className="mt-10 px-4 py-2 bg-blue-500 text-white rounded">
+                <button className="mt-10 px-4 py-2 rounded transition-all border border-black hover:border-teal-600 hover:bg-teal-600 hover:text-white">
                   Shop Now
                 </button>
               </div>
