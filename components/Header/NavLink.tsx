@@ -34,13 +34,10 @@ export default function NavLink() {
         onMouseEnter={() => setIsDropdownOpen(true)}
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
-        <Link
-          href="/collection"
-          className="flex justify-between gap-2 items-center hover:text-teal-500"
-        >
+        <p className="flex cursor-pointer justify-between gap-2 items-center hover:text-teal-500">
           <span>Collection</span>
           {isDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-        </Link>
+        </p>
         {isDropdownOpen && (
           <ul className="md:absolute static top-full left-0 bg-white md:border w-full md:w-40 md:mt-0 mt-1 md:rounded md:shadow-lg z-10">
             {Dropdown.map((item) => (
@@ -61,9 +58,11 @@ export default function NavLink() {
           Product
         </Link>
       </li>
-      <Link href={"/other-page"} className="hover:text-teal-500">
-        Other Page
-      </Link>
+      <li>
+        <Link href={"/other-page"} className="hover:text-teal-500">
+          Other Page
+        </Link>
+      </li>
       <li>
         <Link href={"/blog"} className="hover:text-teal-500">
           Blog

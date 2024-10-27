@@ -16,7 +16,7 @@ export default function NavMobile() {
         <NavIcon />
         <AiOutlineMenu
           onClick={() => setMenu(true)}
-          className="cursor-pointer text-lg"
+          className="cursor-pointer text-lg hover:text-teal-500"
         />
       </div>
       <div
@@ -28,7 +28,7 @@ export default function NavMobile() {
         <div className="w-60 h-screen p-8 flex flex-col gap-8 absolute top-0 left-0 z-50 bg-white text-black shadow-lg">
           <AiOutlineClose
             onClick={() => setMenu(false)}
-            className="mb-5 text-lg cursor-pointer"
+            className="mb-5 text-lg cursor-pointer hover:text-teal-500"
           />
           <NavTitle />
           <NavLink />
