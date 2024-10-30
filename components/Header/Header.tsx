@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <main className="shadow-lg bg-white">
       <section className="container mx-auto">
-        <div className="flex flex-row justify-between items-center p-4">
+        <div className="flex flex-row justify-between items-center">
           <div>
             <NavTitle />
           </div>

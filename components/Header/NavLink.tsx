@@ -24,20 +24,23 @@ export default function NavLink() {
 
   return (
     <ul className="flex flex-col md:flex-row gap-5 justify-center">
-      <li>
+      <li className="py-0 md:py-4 px-2 md:px-1">
         <Link href={"/home"} className="transition-all hover:text-teal-500">
           Home
         </Link>
       </li>
       <li
-        className="relative"
+        className="py-0 md:py-4 px-2 md:px-1 relative"
         onMouseEnter={() => setIsDropdownOpen(true)}
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
-        <p className="flex cursor-pointer justify-between gap-2 items-center transition-all hover:text-teal-500">
+        <Link
+          href={""}
+          className="flex cursor-pointer justify-between gap-2 items-center transition-all hover:text-teal-500"
+        >
           <span>Collection</span>
           {isDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-        </p>
+        </Link>
         {isDropdownOpen && (
           <ul className="md:absolute static top-full left-0 bg-white md:border w-full md:w-40 md:mt-0 mt-1 md:rounded md:shadow-lg z-10">
             {Dropdown.map((item) => (
@@ -53,12 +56,12 @@ export default function NavLink() {
           </ul>
         )}
       </li>
-      <li>
+      <li className="py-0 md:py-4 px-2 md:px-1">
         <Link href={"/product"} className="transition-all hover:text-teal-500">
           Product
         </Link>
       </li>
-      <li>
+      <li className="py-0 md:py-4 px-2 md:px-1">
         <Link
           href={"/other-page"}
           className="transition-all hover:text-teal-500"
@@ -66,7 +69,7 @@ export default function NavLink() {
           Other Page
         </Link>
       </li>
-      <li>
+      <li className="py-0 md:py-4 px-2 md:px-1">
         <Link href={"/blog"} className="transition-all hover:text-teal-500">
           Blog
         </Link>

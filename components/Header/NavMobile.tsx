@@ -26,10 +26,12 @@ export default function NavMobile() {
         )}
       >
         <div className="w-60 h-screen p-8 flex flex-col gap-8 absolute top-0 left-0 z-50 bg-white text-black shadow-lg">
-          <AiOutlineClose
-            onClick={() => setMenu(false)}
-            className="mb-5 text-lg cursor-pointer transition-all hover:text-teal-500"
-          />
+          <p className="p-1 mb-5">
+            <AiOutlineClose
+              onClick={() => setMenu(false)}
+              className="text-xl cursor-pointer transition-all hover:text-teal-500"
+            />
+          </p>
           <NavTitle />
           <NavLink />
         </div>
