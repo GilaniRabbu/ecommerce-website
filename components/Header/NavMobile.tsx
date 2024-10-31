@@ -12,7 +12,7 @@ export default function NavMobile() {
 
   return (
     <div>
-      <div className="flex p-3 gap-5 items-center">
+      <div className="flex p-3 gap-4 items-center">
         <NavIcon />
         <AiOutlineMenu
           onClick={() => setMenu(true)}

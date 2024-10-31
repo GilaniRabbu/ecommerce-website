@@ -7,14 +7,6 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 export default function NavLink() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // const links = [
-  //   { id: 1, title: "Home", link: "/home" },
-  //   { id: 2, title: "Collection", link: "/collection" },
-  //   { id: 3, title: "Product", link: "/product" },
-  //   { id: 4, title: "Other Page", link: "/other-page" },
-  //   { id: 5, title: "Blog", link: "/blog" },
-  // ];
-
   const Dropdown = [
     { id: 1, title: "Collection 1", link: "/collection-1" },
     { id: 2, title: "Collection 2", link: "/collection-2" },
@@ -24,13 +16,13 @@ export default function NavLink() {
 
   return (
     <ul className="flex flex-col md:flex-row gap-5 justify-center">
-      <li className="py-0 md:py-4 px-2 md:px-1">
+      <li className="py-0 md:py-5 px-2 md:px-1">
         <Link href={"/home"} className="transition-all hover:text-teal-500">
           Home
         </Link>
       </li>
       <li
-        className="py-0 md:py-4 px-2 md:px-1 relative"
+        className="py-0 md:py-5 px-2 md:px-1 relative"
         onMouseEnter={() => setIsDropdownOpen(true)}
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
@@ -56,12 +48,12 @@ export default function NavLink() {
           </ul>
         )}
       </li>
-      <li className="py-0 md:py-4 px-2 md:px-1">
+      <li className="py-0 md:py-5 px-2 md:px-1">
         <Link href={"/product"} className="transition-all hover:text-teal-500">
           Product
         </Link>
       </li>
-      <li className="py-0 md:py-4 px-2 md:px-1">
+      <li className="py-0 md:py-5 px-2 md:px-1">
         <Link
           href={"/other-page"}
           className="transition-all hover:text-teal-500"
@@ -69,7 +61,7 @@ export default function NavLink() {
           Other Page
         </Link>
       </li>
-      <li className="py-0 md:py-4 px-2 md:px-1">
+      <li className="py-0 md:py-5 px-2 md:px-1">
         <Link href={"/blog"} className="transition-all hover:text-teal-500">
           Blog
         </Link>
