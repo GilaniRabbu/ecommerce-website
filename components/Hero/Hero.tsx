@@ -20,15 +20,15 @@ const HeroSection = () => {
   const slides = [
     {
       text: "Discover And Find Your New Product",
-      image: "https://dummyimage.com/400x400/000/fff",
+      image: "/hero-img-1.jpg",
     },
     {
       text: "Your Next Favorite Product Awaits",
-      image: "https://dummyimage.com/400x400/111/fff",
+      image: "/hero-img-2.jpg",
     },
     {
       text: "Exclusive Product Just for You",
-      image: "https://dummyimage.com/400x400/333/fff",
+      image: "/hero-img-3.jpg",
     },
   ];
 
@@ -51,15 +51,15 @@ const HeroSection = () => {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <section className="h-full py-10 flex flex-col md:flex-row gap-10 justify-center items-center">
-              <div className="w-3/4 md:w-1/3 p-4">
+            <section className="h-full py-10 flex flex-col md:flex-row gap-6 md:gap-10 justify-center items-center">
+              <div className="w-3/4 md:w-1/3 p-4 text-center md:text-left">
                 <p className="text-gray-500">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit
                 </p>
-                <h1 className="text-2xl md:text-5xl font-bold mt-5">
+                <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold mt-3 md:mt-5">
                   {slide.text}
                 </h1>
-                <button className="mt-10 px-4 py-2 rounded transition-all border border-black hover:border-teal-600 hover:bg-teal-600 hover:text-white">
+                <button className="mt-8 md:mt-10 px-4 py-2 rounded transition-colors border text-white bg-black hover:text-white hover:bg-teal-600">
                   Shop Now
                 </button>
               </div>
@@ -68,7 +68,7 @@ const HeroSection = () => {
                 alt="Product Image"
                 width={400}
                 height={400}
-                className="object-cover"
+                className="object-cover w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-full"
               />
             </section>
           </SwiperSlide>
