@@ -82,7 +82,7 @@ export default function NavIcon() {
             >
               <path
                 fill="currentColor"
-                d="M7.625 6.4L12 .725L16.375 6.4l6.85 2.3l-4.325 6.125l.175 6.825L12 19.675L4.925 21.65L5.1 14.8L.8 8.7zM8.85 8.125L4 9.725L7.1 14.2L7 18.975l5-1.375l5 1.4l-.1-4.8L20 9.775l-4.85-1.65L12 4zM12 11.5"
+                d="m8.85 16.825l3.15-1.9l3.15 1.925l-.825-3.6l2.775-2.4l-3.65-.325l-1.45-3.4l-1.45 3.375l-3.65.325l2.775 2.425zM5.825 21l1.625-7.025L2 9.25l7.2-.625L12 2l2.8 6.625l7.2.625l-5.45 4.725L18.175 21L12 17.275zM12 12.25"
               />
             </svg>
           </Link>
@@ -173,7 +173,7 @@ export default function NavIcon() {
 
         {/* User Panel */}
         <div
-          className={`fixed inset-y-0 right-0 w-full md:w-80 bg-white transition-transform duration-300 ease-in-out transform z-50 ${
+          className={`fixed inset-y-0 right-0 w-80 bg-white transition-transform duration-300 ease-in-out transform z-50 ${
             activePanel === "user" ? "translate-x-0" : "translate-x-full"
           }`}
         >
@@ -255,7 +255,7 @@ export default function NavIcon() {
 
         {/* Cart Panel */}
         <div
-          className={`fixed inset-y-0 right-0 w-full md:w-80 bg-white transition-transform duration-300 ease-in-out transform z-50 ${
+          className={`fixed inset-y-0 right-0 w-80 bg-white transition-transform duration-300 ease-in-out transform z-50 ${
             activePanel === "cart" ? "translate-x-0" : "translate-x-full"
           }`}
         >

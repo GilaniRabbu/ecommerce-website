@@ -1,7 +1,8 @@
 "use client";
 
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { useState } from "react";
+import { IoClose } from "react-icons/io5";
+import { AiOutlineMenu } from "react-icons/ai";
+import { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 import NavIcon from "./NavIcon";
 import NavLink from "./NavLink";
@@ -9,6 +10,23 @@ import NavTitle from "./NavTitle";
 
 export default function NavMobile() {
   const [isMenuOpen, setMenu] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        panelRef.current &&
+        !panelRef.current.contains(event.target as Node)
+      ) {
+        setMenu(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div>
@@ -25,11 +43,14 @@ export default function NavMobile() {
           isMenuOpen && "translate-x-0"
         )}
       >
-        <div className="w-60 h-screen p-8 flex flex-col gap-8 absolute top-0 left-0 z-50 bg-white text-black shadow-lg">
-          <p className="p-1 mb-5">
-            <AiOutlineClose
+        <div
+          ref={panelRef}
+          className="w-60 h-screen p-8 flex flex-col gap-8 absolute top-0 left-0 z-50 bg-white text-black shadow-lg"
+        >
+          <p className="px-2 mb-5">
+            <IoClose
               onClick={() => setMenu(false)}
-              className="text-xl cursor-pointer transition-all hover:text-teal-500"
+              className="text-2xl cursor-pointer transition-all hover:text-teal-500"
             />
           </p>
           <NavTitle />
