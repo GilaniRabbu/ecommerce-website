@@ -5,7 +5,7 @@ import NavMobile from "./NavMobile";
 
 export default function Header() {
   return (
-    <main className="shadow-lg bg-white">
+    <main className="shadow bg-white">
       <section className="container mx-auto">
         <div className="flex flex-row justify-between items-center">
           <div>
