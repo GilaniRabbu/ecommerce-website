@@ -56,148 +56,66 @@ export const ProductSection = () => {
               key={item.id}
               className="relative group max-w-[300px] sm:max-w-[350px] md:max-w-[400px] mx-auto"
             >
-              <div className="overflow-hidden rounded">
+              <div className="relative overflow-hidden rounded">
                 <Image
                   src={item.image}
                   alt={item.title}
                   width={800}
                   height={800}
-                  className="cursor-pointer w-auto h-auto transition-transform duration-1000 group-hover:scale-125"
+                  className="w-full h-auto transition-transform duration-1000 group-hover:scale-125"
                 />
-              </div>
-
-              <div className="absolute top-0 left-0 right-0 p-4 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                <div className="relative">
-                  <button
-                    className="p-2 rounded-full bg-white text-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
-                    onMouseEnter={() => setActiveTooltip(`cart-${item.id}`)}
-                    onMouseLeave={() => setActiveTooltip(null)}
-                  >
-                    <AiOutlineShoppingCart className="w-5 h-5" />
-                  </button>
-                  {activeTooltip === `cart-${item.id}` && (
-                    <span
-                      className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-3 mb-3 whitespace-nowrap z-20"
-                      style={{
-                        position: "absolute",
-                        bottom: "calc(100% + 2px)", // places the tooltip above with space for arrow
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "black",
-                        color: "white",
-                        padding: "4px 8px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 20,
-                        fontSize: "0.75rem",
-                        textAlign: "center",
-                      }}
+                <div className="cursor-pointer absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  <div className="relative">
+                    <button
+                      className="p-2 rounded-full bg-white text-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+                      onMouseEnter={() => setActiveTooltip(`cart-${item.id}`)}
+                      onMouseLeave={() => setActiveTooltip(null)}
+                      aria-label="Quick Add"
                     >
-                      Quick Add
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: "100%", // places arrow at the bottom of tooltip
-                          left: "50%",
-                          transform: "translateX(-50%)",
-                          width: 0,
-                          height: 0,
-                          borderLeft: "5px solid transparent",
-                          borderRight: "5px solid transparent",
-                          borderTop: "5px solid black", // triangle arrow pointing down
-                          zIndex: 20,
-                        }}
-                      />
-                    </span>
-                  )}
-                </div>
-                <div className="relative">
-                  <button
-                    className="p-2 rounded-full bg-white text-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
-                    onMouseEnter={() => setActiveTooltip(`wishlist-${item.id}`)}
-                    onMouseLeave={() => setActiveTooltip(null)}
-                  >
-                    <AiOutlineStar className="w-5 h-5" />
-                  </button>
-                  {activeTooltip === `wishlist-${item.id}` && (
-                    <span
-                      className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-3 mb-3 whitespace-nowrap z-20"
-                      style={{
-                        position: "absolute",
-                        bottom: "calc(100% + 2px)",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "black",
-                        color: "white",
-                        padding: "4px 8px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 20,
-                        fontSize: "0.75rem",
-                        textAlign: "center",
-                      }}
+                      <AiOutlineShoppingCart className="w-5 h-5" />
+                    </button>
+                    {activeTooltip === `cart-${item.id}` && (
+                      <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-3 mb-2 whitespace-nowrap z-20">
+                        Quick Add
+                        <span className="absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-black" />
+                      </span>
+                    )}
+                  </div>
+                  <div className="relative">
+                    <button
+                      className="p-2 rounded-full bg-white text-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+                      onMouseEnter={() =>
+                        setActiveTooltip(`wishlist-${item.id}`)
+                      }
+                      onMouseLeave={() => setActiveTooltip(null)}
+                      aria-label="Add to Wishlist"
                     >
-                      Add to Wishlist
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: "100%",
-                          left: "50%",
-                          transform: "translateX(-50%)",
-                          width: 0,
-                          height: 0,
-                          borderLeft: "5px solid transparent",
-                          borderRight: "5px solid transparent",
-                          borderTop: "5px solid black",
-                          zIndex: 20,
-                        }}
-                      />
-                    </span>
-                  )}
-                </div>
-                <div className="relative">
-                  <button
-                    className="p-2 rounded-full bg-white text-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
-                    onMouseEnter={() => setActiveTooltip(`share-${item.id}`)}
-                    onMouseLeave={() => setActiveTooltip(null)}
-                  >
-                    <AiOutlinePicture className="w-5 h-5" />
-                  </button>
-                  {activeTooltip === `share-${item.id}` && (
-                    <span
-                      className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-3 mb-3 whitespace-nowrap z-20"
-                      style={{
-                        position: "absolute",
-                        bottom: "calc(100% + 2px)",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "black",
-                        color: "white",
-                        padding: "4px 8px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 20,
-                        fontSize: "0.75rem",
-                        textAlign: "center",
-                      }}
+                      <AiOutlineStar className="w-5 h-5" />
+                    </button>
+                    {activeTooltip === `wishlist-${item.id}` && (
+                      <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-3 mb-2 whitespace-nowrap z-20">
+                        Add to Wishlist
+                        <span className="absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-black" />
+                      </span>
+                    )}
+                  </div>
+                  <div className="relative">
+                    <button
+                      className="p-2 rounded-full bg-white text-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+                      onMouseEnter={() => setActiveTooltip(`share-${item.id}`)}
+                      onMouseLeave={() => setActiveTooltip(null)}
+                      aria-label="Quick View"
                     >
-                      Quick View
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: "100%",
-                          left: "50%",
-                          transform: "translateX(-50%)",
-                          width: 0,
-                          height: 0,
-                          borderLeft: "5px solid transparent",
-                          borderRight: "5px solid transparent",
-                          borderTop: "5px solid black",
-                          zIndex: 20,
-                        }}
-                      />
-                    </span>
-                  )}
+                      <AiOutlinePicture className="w-5 h-5" />
+                    </button>
+                    {activeTooltip === `share-${item.id}` && (
+                      <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-3 mb-2 whitespace-nowrap z-20">
+                        Quick View
+                        <span className="absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-black" />
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
 
