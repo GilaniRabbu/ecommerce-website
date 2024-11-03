@@ -149,7 +149,7 @@ export default function NavIcon() {
                 <input
                   type="search"
                   placeholder="ENTER YOUR KEYWORDS"
-                  className="w-full p-4 text-sm bg-transparent border border-teal-600"
+                  className="w-full p-4 text-sm bg-transparent outline-none border border-teal-600"
                 />
                 <button className="text-xs absolute right-4">SEARCH</button>
               </div>
