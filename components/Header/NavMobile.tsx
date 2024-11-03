@@ -1,6 +1,5 @@
 "use client";
 
-import { IoClose } from "react-icons/io5";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
@@ -30,7 +29,7 @@ export default function NavMobile() {
 
   return (
     <div>
-      <div className="flex p-3 gap-4 items-center">
+      <div className="flex py-3 px-4 gap-4 items-center">
         <NavIcon />
         <AiOutlineMenu
           onClick={() => setMenu(true)}
@@ -45,14 +44,8 @@ export default function NavMobile() {
       >
         <div
           ref={panelRef}
-          className="w-60 h-screen p-8 flex flex-col gap-8 absolute top-0 left-0 z-50 bg-white text-black shadow-lg"
+          className="w-60 h-screen py-5 px-2 flex flex-col gap-10 absolute top-0 left-0 z-50 bg-white text-black shadow-lg"
         >
-          <p className="px-2 mb-5">
-            <IoClose
-              onClick={() => setMenu(false)}
-              className="text-2xl cursor-pointer transition-all hover:text-teal-500"
-            />
-          </p>
           <NavTitle />
           <NavLink />
         </div>
