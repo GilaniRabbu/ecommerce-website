@@ -8,46 +8,45 @@ import {
   AiOutlinePicture,
 } from "react-icons/ai";
 
-const ProductSection = () => {
+const DailyDeals = () => {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
 
   const items = [
     {
       id: 1,
-      title: "Uiamond Halo Stud",
+      title: "Ciamond Halo Stud",
       description: "Lorem ipsum dolor sit ame",
-      image: "/product-image-1.jpg",
-      price: 628,
+      image: "/daily-deal-1.jpg",
+      price: 300,
     },
     {
       id: 2,
-      title: "Diamond Halo Stud Sociis",
+      title: "Diamond Halo Stud Magnis",
       description: "Lorem ipsum dolor sit ame",
-      image: "/product-image-2.jpg",
-      price: 200,
+      image: "/daily-deal-2.jpg",
+      price: 325,
     },
     {
       id: 3,
-      title: "Viamond Halo Stud Donec",
+      title: "Diamond Halo Stud Dolor",
       description: "Lorem ipsum dolor sit ame",
-      image: "/product-image-3.jpg",
-      price: 490,
+      image: "/daily-deal-3.jpg",
+      price: 269,
     },
     {
       id: 4,
-      title: "Diamond Halo Stud Quis",
+      title: "Diamond Halo Stud Massa",
       description: "Lorem ipsum dolor sit ame",
-      image: "/product-image-4.jpg",
-      price: 736,
+      image: "/daily-deal-4.jpg",
+      price: 269,
     },
   ];
 
   return (
     <main className="px-5 py-20">
       <section className="container mx-auto">
-        <p className="text-center text-base text-gray-500">PRODUCT</p>
         <h1 className="text-center font-semibold text-2xl md:text-4xl">
-          Our Newest Product Line
+          Deal Of The Day
         </h1>
 
         <div className="pt-10 px-4 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center justify-center gap-10 md:gap-8">
@@ -132,4 +131,4 @@ const ProductSection = () => {
   );
 };
 
-export default ProductSection;
+export default DailyDeals;
