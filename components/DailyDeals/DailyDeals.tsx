@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AiOutlineShoppingCart,
   AiOutlineStar,
@@ -10,6 +10,55 @@ import {
 
 const DailyDeals = () => {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+
+  const [timeLeft, setTimeLeft] = useState({
+    days: 3,
+    hours: 4,
+    minutes: 30,
+    seconds: 1,
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        const { days, hours, minutes, seconds } = prevTime;
+
+        if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+          clearInterval(timer);
+          return prevTime;
+        }
+
+        let newSeconds = seconds - 1;
+        let newMinutes = minutes;
+        let newHours = hours;
+        let newDays = days;
+
+        if (newSeconds < 0) {
+          newSeconds = 59;
+          newMinutes -= 1;
+        }
+
+        if (newMinutes < 0) {
+          newMinutes = 59;
+          newHours -= 1;
+        }
+
+        if (newHours < 0) {
+          newHours = 23;
+          newDays -= 1;
+        }
+
+        return {
+          days: newDays,
+          hours: newHours,
+          minutes: newMinutes,
+          seconds: newSeconds,
+        };
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const items = [
     {
@@ -45,9 +94,24 @@ const DailyDeals = () => {
   return (
     <main className="px-5 py-20">
       <section className="container mx-auto">
-        <h1 className="text-center font-semibold text-2xl md:text-4xl">
-          Deal Of The Day
-        </h1>
+        <div className="px-4 flex gap-4 flex-col md:flex-row items-center md:justify-between">
+          <h1 className="text-center font-semibold text-2xl md:text-4xl">
+            Deal Of The Day
+          </h1>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {Object.entries(timeLeft).map(([unit, value]) => (
+              <div
+                key={unit}
+                className="px-2 py-4 w-20 text-center rounded-sm bg-gray-100"
+              >
+                <div className="text-2xl font-bold mb-1">
+                  {value.toString().padStart(2, "0")}
+                </div>
+                <div className="text-xs capitalize">{unit}</div>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="pt-10 px-4 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center justify-center gap-10 md:gap-8">
           {items.map((item) => (
