@@ -6,10 +6,122 @@ import {
   AiOutlineShoppingCart,
   AiOutlineStar,
   AiOutlinePicture,
+  AiOutlineClose,
 } from "react-icons/ai";
+
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  price: number;
+}
+
+const Modal = ({
+  isOpen,
+  onClose,
+  product,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  product: Product | null;
+}) => {
+  if (!isOpen || !product) return null;
+
+  const [quantity, setQuantity] = useState(1);
+
+  const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  return (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={handleOutsideClick}
+    >
+      <div className="p-5 bg-white rounded-lg max-w-3xl w-full">
+        <button
+          onClick={onClose}
+          className="absolute top-12 right-64 text-white"
+        >
+          <AiOutlineClose className="w-5 h-5" />
+        </button>
+        <div className="flex md-4 gap-10 justify-between items-center">
+          <div className="w-1/2">
+            <Image
+              src={product.image}
+              alt={product.title}
+              width={300}
+              height={300}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+          <div className="w-1/2">
+            <h2 className="text-xl font-semibold">{product.title}</h2>
+            <p className="text-3xl font-bold my-4">${product.price}</p>
+            <div>
+              <div className="flex mb-5 text-xs">
+                <span className="w-24 font-semibold">SKU:</span>
+                <span className="">E-00214</span>
+              </div>
+              <div className="flex text-xs">
+                <span className="w-24 font-semibold">CATEGORY:</span>
+                <span className="flex-1 text-muted">
+                  Armchair, Bookshelf, Clocks, Flower vase, Hanging Light, Home
+                  page, Planter, Sofa, Tables
+                </span>
+              </div>
+            </div>
+            <div className="quantity">
+              <p className="font-semibold text-xs mt-8 mb-4">QUANTITY:</p>
+              <div>
+                <div className="flex gap-2 justify-between">
+                  <div className="flex items-center rounded border border-gray-400">
+                    <button
+                      className="h-10 w-9 text-gray-400"
+                      onClick={() =>
+                        setQuantity((prev) => Math.max(1, prev - 1))
+                      }
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      className="h-10 w-[80px] px-3 text-center outline-none"
+                      value={quantity}
+                      onChange={(e) =>
+                        setQuantity(Math.max(1, parseInt(e.target.value) || 1))
+                      }
+                    />
+                    <button
+                      className="h-10 w-9 text-gray-400"
+                      onClick={() => setQuantity((prev) => prev + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button className="w-[180px] text-sm rounded bg-teal-600 text-white">
+                    Add to Cart
+                  </button>
+                </div>
+                <button className="w-full text-sm bg-teal-600 text-white py-2 px-4 mt-5 rounded">
+                  Buy It Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const ProductSection = () => {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const items = [
     {
@@ -41,6 +153,16 @@ const ProductSection = () => {
       price: 736,
     },
   ];
+
+  const openModal = (product: Product) => {
+    setSelectedProduct(product);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedProduct(null);
+  };
 
   return (
     <main className="px-5 py-20">
@@ -100,11 +222,12 @@ const ProductSection = () => {
                       </span>
                     )}
                   </div>
-                  <div className="relative">
+                  <div className="relative hidden md:block">
                     <button
                       className="p-2 rounded-full bg-white text-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
                       onMouseEnter={() => setActiveTooltip(`share-${item.id}`)}
                       onMouseLeave={() => setActiveTooltip(null)}
+                      onClick={() => openModal(item)}
                       aria-label="Quick View"
                     >
                       <AiOutlinePicture className="w-5 h-5" />
@@ -128,6 +251,11 @@ const ProductSection = () => {
           ))}
         </div>
       </section>
+      <Modal
+        isOpen={modalOpen}
+        onClose={closeModal}
+        product={selectedProduct}
+      />
     </main>
   );
 };
