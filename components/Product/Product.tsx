@@ -26,8 +26,6 @@ const Modal = ({
   onClose: () => void;
   product: Product | null;
 }) => {
-  if (!isOpen || !product) return null;
-
   const [quantity, setQuantity] = useState(1);
 
   const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -35,6 +33,8 @@ const Modal = ({
       onClose();
     }
   };
+
+  if (!isOpen || !product) return null;
 
   return (
     <div
