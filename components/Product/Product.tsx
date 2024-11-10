@@ -1,19 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   AiOutlineShoppingCart,
   AiOutlineStar,
   AiOutlinePicture,
   AiOutlineClose,
 } from "react-icons/ai";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
 
 interface Product {
   id: number;
   title: string;
   description: string;
   image: string;
+  images: string[];
   price: number;
 }
 
@@ -34,6 +40,8 @@ const Modal = ({
     }
   };
 
+  const swiperRef = useRef<SwiperCore | null>(null);
+
   if (!isOpen || !product) return null;
 
   return (
@@ -41,22 +49,35 @@ const Modal = ({
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       onClick={handleOutsideClick}
     >
-      <div className="p-5 bg-white rounded-lg max-w-3xl w-full">
+      <div className="p-5 bg-white relative rounded-lg max-w-3xl w-full">
         <button
           onClick={onClose}
-          className="absolute top-12 right-64 text-white"
+          className="absolute top-2 right-2 text-gray-500"
         >
           <AiOutlineClose className="w-5 h-5" />
         </button>
         <div className="flex md-4 gap-10 justify-between items-center">
-          <div className="w-1/2">
-            <Image
-              src={product.image}
-              alt={product.title}
-              width={300}
-              height={300}
-              className="w-full h-auto object-cover"
-            />
+          <div className="w-1/2 swiper">
+            <Swiper
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              modules={[Autoplay]}
+              className="mySwiper h-auto"
+            >
+              {product.images.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <Image
+                    src={image}
+                    alt={`${product.title} - Image ${index + 1}`}
+                    width={300}
+                    height={300}
+                    className="w-full h-auto object-cover"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
           <div className="w-1/2">
             <h2 className="text-xl font-semibold">{product.title}</h2>
@@ -78,9 +99,9 @@ const Modal = ({
               <p className="font-semibold text-xs mt-8 mb-4">QUANTITY:</p>
               <div>
                 <div className="flex gap-2 justify-between">
-                  <div className="flex items-center rounded border border-gray-400">
+                  <div className="h-10 flex items-center rounded border border-gray-400">
                     <button
-                      className="h-10 w-9 text-gray-400"
+                      className="h-9 w-9 text-gray-400"
                       onClick={() =>
                         setQuantity((prev) => Math.max(1, prev - 1))
                       }
@@ -89,24 +110,24 @@ const Modal = ({
                     </button>
                     <input
                       type="number"
-                      className="h-10 w-[80px] px-3 text-center outline-none"
+                      className="h-9 w-[80px] px-3 text-center outline-none"
                       value={quantity}
                       onChange={(e) =>
                         setQuantity(Math.max(1, parseInt(e.target.value) || 1))
                       }
                     />
                     <button
-                      className="h-10 w-9 text-gray-400"
+                      className="h-9 w-9 text-gray-400"
                       onClick={() => setQuantity((prev) => prev + 1)}
                     >
                       +
                     </button>
                   </div>
-                  <button className="w-[180px] text-sm rounded bg-teal-600 text-white">
+                  <button className="h-10 w-[180px] text-sm rounded bg-teal-600 text-white">
                     Add to Cart
                   </button>
                 </div>
-                <button className="w-full text-sm bg-teal-600 text-white py-2 px-4 mt-5 rounded">
+                <button className="h-10 w-full text-sm mt-5 rounded bg-teal-600 text-white">
                   Buy It Now
                 </button>
               </div>
@@ -129,6 +150,11 @@ const ProductSection = () => {
       title: "Uiamond Halo Stud",
       description: "Lorem ipsum dolor sit ame",
       image: "/product-image-1.jpg",
+      images: [
+        "/product-image-1.jpg",
+        "/product-image-1-2.jpg",
+        "/product-image-1-3.jpg",
+      ],
       price: 628,
     },
     {
@@ -136,6 +162,11 @@ const ProductSection = () => {
       title: "Diamond Halo Stud Sociis",
       description: "Lorem ipsum dolor sit ame",
       image: "/product-image-2.jpg",
+      images: [
+        "/product-image-2.jpg",
+        "/product-image-2-2.jpg",
+        "/product-image-2-3.jpg",
+      ],
       price: 200,
     },
     {
@@ -143,6 +174,11 @@ const ProductSection = () => {
       title: "Viamond Halo Stud Donec",
       description: "Lorem ipsum dolor sit ame",
       image: "/product-image-3.jpg",
+      images: [
+        "/product-image-3.jpg",
+        "/product-image-3-2.jpg",
+        "/product-image-3-3.jpg",
+      ],
       price: 490,
     },
     {
@@ -150,6 +186,11 @@ const ProductSection = () => {
       title: "Diamond Halo Stud Quis",
       description: "Lorem ipsum dolor sit ame",
       image: "/product-image-4.jpg",
+      images: [
+        "/product-image-4.jpg",
+        "/product-image-4-2.jpg",
+        "/product-image-4-3.jpg",
+      ],
       price: 736,
     },
   ];
