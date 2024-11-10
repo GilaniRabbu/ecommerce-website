@@ -183,7 +183,7 @@ const ProductSection = () => {
     },
     {
       id: 4,
-      title: "Diamond Halo Stud Quis",
+      title: "Diamond Halo Stud Magnis",
       description: "Lorem ipsum dolor sit ame",
       image: "/product-image-4.jpg",
       images: [
@@ -191,7 +191,7 @@ const ProductSection = () => {
         "/product-image-4-2.jpg",
         "/product-image-4-3.jpg",
       ],
-      price: 736,
+      price: 325,
     },
   ];
 
