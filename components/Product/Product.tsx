@@ -128,7 +128,7 @@ const Modal = ({
                     </button>
                     <input
                       type="number"
-                      className="h-9 w-[80px] px-3 text-center outline-none"
+                      className="h-9 w-[70px] px-3 text-center outline-none custom-num-input"
                       value={quantity}
                       onChange={(e) =>
                         setQuantity(Math.max(1, parseInt(e.target.value) || 1))
@@ -141,7 +141,7 @@ const Modal = ({
                       +
                     </button>
                   </div>
-                  <button className="h-10 w-[180px] text-sm rounded bg-teal-600 text-white">
+                  <button className="h-10 w-[190px] text-sm rounded bg-teal-600 text-white">
                     Add to Cart
                   </button>
                 </div>

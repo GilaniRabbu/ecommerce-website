@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Hide the spinner controls for Chrome, Safari, Edge, and Opera */
+.custom-num-input::-webkit-outer-spin-button,
+.custom-num-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide the spinner controls for Firefox */
+.custom-num-input[type="number"] {
+    -moz-appearance: textfield;
+}
