@@ -6,11 +6,11 @@ import {
   AiOutlineShoppingCart,
   AiOutlineStar,
   AiOutlinePicture,
-  AiOutlineClose,
 } from "react-icons/ai";
+import { IoChevronBack, IoChevronForward, IoClose } from "react-icons/io5";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 
@@ -54,30 +54,48 @@ const Modal = ({
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500"
         >
-          <AiOutlineClose className="w-5 h-5" />
+          <IoClose className="w-5 h-5" />
         </button>
         <div className="flex md-4 gap-10 justify-between items-center">
-          <div className="w-1/2 swiper">
+          <div className="relative w-1/2 swiper">
             <Swiper
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
               }}
               autoplay={{ delay: 3000, disableOnInteraction: false }}
-              modules={[Autoplay]}
+              loop={true}
+              modules={[Autoplay, Navigation]}
               className="mySwiper h-auto"
             >
               {product.images.map((image, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide
+                  key={index}
+                  className="flex items-center justify-center"
+                >
                   <Image
                     src={image}
                     alt={`${product.title} - Image ${index + 1}`}
                     width={300}
                     height={300}
-                    className="w-full h-auto object-cover"
+                    className="w-full h-auto object-contain"
                   />
                 </SwiperSlide>
               ))}
             </Swiper>
+            <div className="absolute inset-0 flex justify-between items-center px-1">
+              <button
+                className="w-10 h-10 flex justify-center items-center z-10 bg-teal-500 text-white rounded-full"
+                onClick={() => swiperRef.current?.slidePrev()}
+              >
+                <IoChevronBack />
+              </button>
+              <button
+                className="w-10 h-10 flex justify-center items-center z-10 bg-teal-500 text-white rounded-full"
+                onClick={() => swiperRef.current?.slideNext()}
+              >
+                <IoChevronForward />
+              </button>
+            </div>
           </div>
           <div className="w-1/2">
             <h2 className="text-xl font-semibold">{product.title}</h2>
