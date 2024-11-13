@@ -49,15 +49,15 @@ const Modal = ({
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       onClick={handleOutsideClick}
     >
-      <div className="p-5 bg-white relative rounded-lg max-w-3xl w-full">
+      <div className="max-h-screen p-5 bg-white relative overflow-y-auto rounded-lg max-w-3xl w-full">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-500"
+          className="absolute top-2 right-2 text-gray-500 z-10"
         >
           <IoClose className="w-5 h-5" />
         </button>
-        <div className="flex md-4 gap-10 justify-between items-center">
-          <div className="relative w-1/2 swiper">
+        <div className="flex flex-col md:flex-row gap-10 justify-between items-center">
+          <div className="relative w-full md:w-1/2 swiper div-1">
             <Swiper
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
@@ -77,7 +77,7 @@ const Modal = ({
                     alt={`${product.title} - Image ${index + 1}`}
                     width={300}
                     height={300}
-                    className="w-full h-auto object-contain"
+                    className="w-full h-full object-cover"
                   />
                 </SwiperSlide>
               ))}
@@ -97,7 +97,7 @@ const Modal = ({
               </button>
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="w-full md:w-1/2 hidden md:flex flex-col">
             <h2 className="text-xl font-semibold">{product.title}</h2>
             <p className="text-3xl font-bold my-4">${product.price}</p>
             <div>
