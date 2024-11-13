@@ -49,10 +49,10 @@ const Modal = ({
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       onClick={handleOutsideClick}
     >
-      <div className="max-h-screen p-5 bg-white relative overflow-y-auto rounded-lg max-w-3xl w-full">
+      <div className="max-h-screen p-5 bg-white max-w-xl md:max-w-3xl w-full relative overflow-y-auto md:rounded-lg rounded-none">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-500 z-10"
+          className="absolute p-2 md:p-0 top-2 right-2 z-10 rounded-full md:text-gray-500 md:bg-transparent text-white bg-teal-500"
         >
           <IoClose className="w-5 h-5" />
         </button>
