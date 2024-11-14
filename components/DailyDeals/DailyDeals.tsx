@@ -1,15 +1,167 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   AiOutlineShoppingCart,
   AiOutlineStar,
   AiOutlinePicture,
 } from "react-icons/ai";
 
+import { IoChevronBack, IoChevronForward, IoClose } from "react-icons/io5";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper";
+import { Autoplay, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
+
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  images: string[];
+  price: number;
+}
+
+const Modal = ({
+  isOpen,
+  onClose,
+  product,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  product: Product | null;
+}) => {
+  const [quantity, setQuantity] = useState(1);
+
+  const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  const swiperRef = useRef<SwiperCore | null>(null);
+
+  if (!isOpen || !product) return null;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={handleOutsideClick}
+    >
+      <div className="max-h-screen p-5 bg-white max-w-xl md:max-w-3xl w-full relative overflow-y-auto md:rounded-lg rounded-none">
+        <button
+          onClick={onClose}
+          className="absolute p-2 md:p-0 top-2 right-2 z-10 rounded-full md:text-gray-500 md:bg-transparent text-white bg-teal-500"
+        >
+          <IoClose className="w-5 h-5" />
+        </button>
+        <div className="flex flex-col md:flex-row gap-10 justify-between items-center">
+          <div className="relative w-full md:w-1/2 swiper div-1">
+            <Swiper
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              loop={true}
+              modules={[Autoplay, Navigation]}
+              className="mySwiper h-auto"
+            >
+              {product.images.map((image, index) => (
+                <SwiperSlide
+                  key={index}
+                  className="flex items-center justify-center"
+                >
+                  <Image
+                    src={image}
+                    alt={`${product.title} - Image ${index + 1}`}
+                    width={300}
+                    height={300}
+                    className="w-full h-full object-cover"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className="absolute inset-0 flex justify-between items-center px-1">
+              <button
+                className="w-10 h-10 flex justify-center items-center z-10 bg-teal-500 text-white rounded-full"
+                onClick={() => swiperRef.current?.slidePrev()}
+              >
+                <IoChevronBack />
+              </button>
+              <button
+                className="w-10 h-10 flex justify-center items-center z-10 bg-teal-500 text-white rounded-full"
+                onClick={() => swiperRef.current?.slideNext()}
+              >
+                <IoChevronForward />
+              </button>
+            </div>
+          </div>
+          <div className="w-full md:w-1/2 hidden md:flex flex-col">
+            <h2 className="text-xl font-semibold">{product.title}</h2>
+            <p className="text-3xl font-bold my-4">${product.price}</p>
+            <div>
+              <div className="flex mb-5 text-xs">
+                <span className="w-24 font-semibold">SKU:</span>
+                <span className="">E-00214</span>
+              </div>
+              <div className="flex text-xs">
+                <span className="w-24 font-semibold">CATEGORY:</span>
+                <span className="flex-1 text-muted">
+                  Armchair, Bookshelf, Clocks, Flower vase, Hanging Light, Home
+                  page, Planter, Sofa, Tables
+                </span>
+              </div>
+            </div>
+            <div className="quantity">
+              <p className="font-semibold text-xs mt-8 mb-4">QUANTITY:</p>
+              <div>
+                <div className="flex gap-2 justify-between">
+                  <div className="h-10 flex items-center rounded border border-gray-400">
+                    <button
+                      className="h-9 w-9 text-gray-400"
+                      onClick={() =>
+                        setQuantity((prev) => Math.max(1, prev - 1))
+                      }
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      className="h-9 w-[70px] px-3 text-center outline-none custom-num-input"
+                      value={quantity}
+                      onChange={(e) =>
+                        setQuantity(Math.max(1, parseInt(e.target.value) || 1))
+                      }
+                    />
+                    <button
+                      className="h-9 w-9 text-gray-400"
+                      onClick={() => setQuantity((prev) => prev + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button className="h-10 w-[190px] text-sm rounded bg-teal-600 text-white">
+                    Add to Cart
+                  </button>
+                </div>
+                <button className="h-10 w-full text-sm mt-5 rounded bg-teal-600 text-white">
+                  Buy It Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const DailyDeals = () => {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const [timeLeft, setTimeLeft] = useState({
     days: 3,
@@ -66,20 +218,35 @@ const DailyDeals = () => {
       title: "Ciamond Halo Stud",
       description: "Lorem ipsum dolor sit ame",
       image: "/daily-deal-1.jpg",
+      images: [
+        "/daily-deal-1.jpg",
+        "/daily-deal-1-2.jpg",
+        "/daily-deal-1-3.jpg",
+      ],
       price: 300,
     },
     {
       id: 2,
-      title: "Diamond Halo Stud Magnis",
+      title: "Diamond Halo Stud Amet",
       description: "Lorem ipsum dolor sit ame",
       image: "/daily-deal-2.jpg",
-      price: 325,
+      images: [
+        "/daily-deal-2.jpg",
+        "/daily-deal-2-2.jpg",
+        "/daily-deal-2-3.jpg",
+      ],
+      price: 210,
     },
     {
       id: 3,
       title: "Diamond Halo Stud Dolor",
       description: "Lorem ipsum dolor sit ame",
       image: "/daily-deal-3.jpg",
+      images: [
+        "/daily-deal-3.jpg",
+        "/daily-deal-3-2.jpg",
+        "/daily-deal-3-3.jpg",
+      ],
       price: 269,
     },
     {
@@ -87,9 +254,24 @@ const DailyDeals = () => {
       title: "Diamond Halo Stud Massa",
       description: "Lorem ipsum dolor sit ame",
       image: "/daily-deal-4.jpg",
-      price: 269,
+      images: [
+        "/daily-deal-4.jpg",
+        "/daily-deal-4-2.jpg",
+        "/daily-deal-4-3.jpg",
+      ],
+      price: 280,
     },
   ];
+
+  const openModal = (product: Product) => {
+    setSelectedProduct(product);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedProduct(null);
+  };
 
   return (
     <main className="px-5 py-20">
@@ -163,11 +345,12 @@ const DailyDeals = () => {
                       </span>
                     )}
                   </div>
-                  <div className="relative">
+                  <div className="relative hidden md:block">
                     <button
                       className="p-2 rounded-full bg-white text-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
                       onMouseEnter={() => setActiveTooltip(`share-${item.id}`)}
                       onMouseLeave={() => setActiveTooltip(null)}
+                      onClick={() => openModal(item)}
                       aria-label="Quick View"
                     >
                       <AiOutlinePicture className="w-5 h-5" />
@@ -191,6 +374,11 @@ const DailyDeals = () => {
           ))}
         </div>
       </section>
+      <Modal
+        isOpen={modalOpen}
+        onClose={closeModal}
+        product={selectedProduct}
+      />
     </main>
   );
 };
