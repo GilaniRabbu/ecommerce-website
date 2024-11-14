@@ -164,9 +164,9 @@ const DailyDeals = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const [timeLeft, setTimeLeft] = useState({
-    days: 3,
-    hours: 4,
-    minutes: 30,
+    days: 0,
+    hours: 23,
+    minutes: 59,
     seconds: 1,
   });
 
