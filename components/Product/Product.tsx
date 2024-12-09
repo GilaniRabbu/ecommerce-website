@@ -13,6 +13,7 @@ import SwiperCore from "swiper";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
+import { useCart } from "@/context/CartContext";
 
 interface Product {
   id: number;
@@ -23,14 +24,24 @@ interface Product {
   price: number;
 }
 
+interface CartItem {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
+
 const Modal = ({
   isOpen,
   onClose,
   product,
+  addToCart,
 }: {
   isOpen: boolean;
   onClose: () => void;
   product: Product | null;
+  addToCart: (item: CartItem) => void;
 }) => {
   const [quantity, setQuantity] = useState(1);
 
@@ -41,6 +52,10 @@ const Modal = ({
   };
 
   const swiperRef = useRef<SwiperCore | null>(null);
+
+  const handleQuantityChange = (value: number) => {
+    setQuantity(Math.max(1, value));
+  };
 
   if (!isOpen || !product) return null;
 
@@ -120,9 +135,7 @@ const Modal = ({
                   <div className="h-10 flex items-center rounded border border-gray-400">
                     <button
                       className="h-9 w-9 text-gray-400"
-                      onClick={() =>
-                        setQuantity((prev) => Math.max(1, prev - 1))
-                      }
+                      onClick={() => handleQuantityChange(quantity - 1)}
                     >
                       -
                     </button>
@@ -131,17 +144,29 @@ const Modal = ({
                       className="h-9 w-[70px] px-3 text-center outline-none custom-num-input"
                       value={quantity}
                       onChange={(e) =>
-                        setQuantity(Math.max(1, parseInt(e.target.value) || 1))
+                        handleQuantityChange(parseInt(e.target.value) || 1)
                       }
                     />
                     <button
                       className="h-9 w-9 text-gray-400"
-                      onClick={() => setQuantity((prev) => prev + 1)}
+                      onClick={() => handleQuantityChange(quantity + 1)}
                     >
                       +
                     </button>
                   </div>
-                  <button className="h-10 w-[190px] text-sm rounded bg-teal-600 text-white">
+                  <button
+                    className="h-10 w-[190px] text-sm rounded bg-teal-600 text-white"
+                    onClick={() => {
+                      addToCart({
+                        id: product.id,
+                        title: product.title,
+                        price: product.price,
+                        quantity: quantity,
+                        image: product.image,
+                      });
+                      onClose();
+                    }}
+                  >
                     Add to Cart
                   </button>
                 </div>
@@ -161,11 +186,12 @@ const ProductSection = () => {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { addToCart } = useCart();
 
   const items = [
     {
       id: 1,
-      title: "Uiamond Halo Stud",
+      title: "Uiamond Halo Stud Sociis",
       description: "Lorem ipsum dolor sit ame",
       image: "/product-image-1.jpg",
       images: [
@@ -252,6 +278,15 @@ const ProductSection = () => {
                       className="p-2 rounded-full bg-white text-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
                       onMouseEnter={() => setActiveTooltip(`cart-${item.id}`)}
                       onMouseLeave={() => setActiveTooltip(null)}
+                      onClick={() =>
+                        addToCart({
+                          id: item.id,
+                          title: item.title,
+                          price: item.price,
+                          quantity: 1,
+                          image: item.image,
+                        })
+                      }
                       aria-label="Quick Add"
                     >
                       <AiOutlineShoppingCart className="w-5 h-5" />
@@ -314,6 +349,7 @@ const ProductSection = () => {
         isOpen={modalOpen}
         onClose={closeModal}
         product={selectedProduct}
+        addToCart={addToCart}
       />
     </main>
   );

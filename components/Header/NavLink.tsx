@@ -55,10 +55,10 @@ export default function NavLink() {
       </li>
       <li className="py-0 md:py-5 px-3 md:px-1">
         <Link
-          href={"/other-page"}
+          href={"/cart"}
           className="transition-all hover:text-teal-500"
         >
-          Other Page
+          Cart
         </Link>
       </li>
       <li className="py-0 md:py-5 px-3 md:px-1">

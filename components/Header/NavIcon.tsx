@@ -2,12 +2,17 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useCart } from "@/context/CartContext";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaMinus, FaPlus } from "react-icons/fa6";
+import Image from "next/image";
 
 export default function NavIcon() {
   const [activePanel, setActivePanel] = useState<string | null>(null);
   const [currency, setCurrency] = useState("USD");
   const [language, setLanguage] = useState("ENGLISH");
   const panelRef = useRef<HTMLDivElement>(null);
+  const { cart, removeFromCart, updateQuantity } = useCart();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -91,7 +96,7 @@ export default function NavIcon() {
           <Link
             href={""}
             onClick={() => togglePanel("cart")}
-            className="text-lg transition-all hover:text-teal-500"
+            className="text-lg transition-all hover:text-teal-500 relative"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -103,6 +108,11 @@ export default function NavIcon() {
                 d="M7 22q-.825 0-1.412-.587T5 20t.588-1.412T7 18t1.413.588T9 20t-.587 1.413T7 22m10 0q-.825 0-1.412-.587T15 20t.588-1.412T17 18t1.413.588T19 20t-.587 1.413T17 22M6.15 6l2.4 5h7l2.75-5zM5.2 4h14.75q.575 0 .875.513t.025 1.037l-3.55 6.4q-.275.5-.737.775T15.55 13H8.1L7 15h11q.425 0 .713.288T19 16t-.288.713T18 17H7q-1.125 0-1.7-.987t-.05-1.963L6.6 11.6L3 4H2q-.425 0-.712-.288T1 3t.288-.712T2 2h1.625q.275 0 .525.15t.375.425zm3.35 7h7z"
               />
             </svg>
+            {cart.length > 0 && (
+              <span className="absolute -top-3 left-2 bg-teal-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                {cart.reduce((total, item) => total + item.quantity, 0)}
+              </span>
+            )}
           </Link>
         </li>
       </ul>
@@ -255,7 +265,7 @@ export default function NavIcon() {
 
         {/* Cart Panel */}
         <div
-          className={`fixed inset-y-0 right-0 w-80 bg-white transition-transform duration-300 ease-in-out transform z-50 ${
+          className={`fixed inset-y-0 right-0 w-80 overflow-y-scroll bg-white transition-transform duration-300 ease-in-out transform z-50 ${
             activePanel === "cart" ? "translate-x-0" : "translate-x-full"
           }`}
         >
@@ -294,19 +304,70 @@ export default function NavIcon() {
             </button>
           </div>
           <div className="p-5">
-            <p className="text-center text-gray-500 mb-5">
-              Your cart is currently empty.
-            </p>
-            <div className="flex flex-col items-center gap-2">
-              {["Armchair", "Plants", "Accessories", "Lamp"].map((category) => (
-                <button
-                  key={category}
-                  className="w-40 p-2 rounded-md transition-colors bg-teal-600 text-white hover:bg-teal-700"
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
+            {cart.length === 0 ? (
+              <p className="text-center text-gray-500 mb-5">
+                Your cart is currently empty.
+              </p>
+            ) : (
+              <>
+                {cart.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex justify-between gap-4 mb-4"
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      width={80}
+                      height={80}
+                      className="object-cover"
+                    />
+                    <div>
+                      <p className="text-sm font-semibold mb-3">{item.title}</p>
+                      <p className="text-sm text-gray-500">
+                        ${item.price.toFixed(2)}
+                      </p>
+                      <div className="flex items-center gap-4 mt-3">
+                        <button
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity - 1)
+                          }
+                          className="text-xs text-gray-600 hover:text-gray-800"
+                        >
+                          <FaMinus />
+                        </button>
+                        <span className="text-sm">{item.quantity}</span>
+                        <button
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
+                          className="text-xs text-gray-600 hover:text-gray-800"
+                        >
+                          <FaPlus />
+                        </button>
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <RiDeleteBin6Line />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <p className="font-semibold">
+                    Total: $
+                    {cart
+                      .reduce(
+                        (total, item) => total + item.price * item.quantity,
+                        0
+                      )
+                      .toFixed(2)}
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
         {/* Cart Panel */}

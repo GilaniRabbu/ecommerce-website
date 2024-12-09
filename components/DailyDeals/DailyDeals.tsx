@@ -14,6 +14,7 @@ import SwiperCore from "swiper";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
+import { useCart } from "@/context/CartContext";
 
 interface Product {
   id: number;
@@ -34,6 +35,7 @@ const Modal = ({
   product: Product | null;
 }) => {
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
 
   const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -142,7 +144,19 @@ const Modal = ({
                       +
                     </button>
                   </div>
-                  <button className="h-10 w-[190px] text-sm rounded bg-teal-600 text-white">
+                  <button
+                    className="h-10 w-[190px] text-sm rounded bg-teal-600 text-white"
+                    onClick={() => {
+                      addToCart({
+                        id: product.id,
+                        title: product.title,
+                        price: product.price,
+                        quantity: quantity,
+                        image: product.image,
+                      });
+                      onClose();
+                    }}
+                  >
                     Add to Cart
                   </button>
                 </div>
@@ -159,6 +173,7 @@ const Modal = ({
 };
 
 const DailyDeals = () => {
+  const { addToCart } = useCart();
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -214,8 +229,8 @@ const DailyDeals = () => {
 
   const items = [
     {
-      id: 1,
-      title: "Ciamond Halo Stud",
+      id: 101,
+      title: "Ciamond Halo Stud Amet",
       description: "Lorem ipsum dolor sit ame",
       image: "/daily-deal-1.jpg",
       images: [
@@ -226,7 +241,7 @@ const DailyDeals = () => {
       price: 300,
     },
     {
-      id: 2,
+      id: 102,
       title: "Diamond Halo Stud Amet",
       description: "Lorem ipsum dolor sit ame",
       image: "/daily-deal-2.jpg",
@@ -238,7 +253,7 @@ const DailyDeals = () => {
       price: 210,
     },
     {
-      id: 3,
+      id: 103,
       title: "Diamond Halo Stud Dolor",
       description: "Lorem ipsum dolor sit ame",
       image: "/daily-deal-3.jpg",
@@ -250,7 +265,7 @@ const DailyDeals = () => {
       price: 269,
     },
     {
-      id: 4,
+      id: 104,
       title: "Diamond Halo Stud Massa",
       description: "Lorem ipsum dolor sit ame",
       image: "/daily-deal-4.jpg",
@@ -316,6 +331,15 @@ const DailyDeals = () => {
                       className="p-2 rounded-full bg-white text-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
                       onMouseEnter={() => setActiveTooltip(`cart-${item.id}`)}
                       onMouseLeave={() => setActiveTooltip(null)}
+                      onClick={() =>
+                        addToCart({
+                          id: item.id,
+                          title: item.title,
+                          price: item.price,
+                          quantity: 1,
+                          image: item.image,
+                        })
+                      }
                       aria-label="Quick Add"
                     >
                       <AiOutlineShoppingCart className="w-5 h-5" />
