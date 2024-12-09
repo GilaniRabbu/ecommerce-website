@@ -4,7 +4,6 @@ import Header from "@/components/Header/Header";
 import HeroSection from "@/components/Hero/Hero";
 import ProductSection from "@/components/Product/Product";
 import Favorites from "@/pages/favorites";
-import Cart from "@/pages/Cart";
 
 export default function Home() {
   return (
@@ -15,7 +14,6 @@ export default function Home() {
         <ProductSection />
         <DailyDeals />
         <Favorites />
-        <Cart />
       </Suspense>
     </main>
   );
