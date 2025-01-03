@@ -15,6 +15,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 interface Product {
   id: number;
@@ -177,6 +178,7 @@ const DailyDeals = () => {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -288,6 +290,19 @@ const DailyDeals = () => {
     setSelectedProduct(null);
   };
 
+  const toggleWishlist = (product: Product) => {
+    if (isInWishlist(product.id.toString())) {
+      removeFromWishlist(product.id.toString());
+    } else {
+      addToWishlist({
+        id: product.id.toString(),
+        title: product.title,
+        price: product.price,
+        image: product.image,
+      });
+    }
+  };
+
   return (
     <main className="px-5 py-20">
       <section className="container mx-auto">
@@ -358,13 +373,26 @@ const DailyDeals = () => {
                         setActiveTooltip(`wishlist-${item.id}`)
                       }
                       onMouseLeave={() => setActiveTooltip(null)}
-                      aria-label="Add to Wishlist"
+                      onClick={() => toggleWishlist(item)}
+                      aria-label={
+                        isInWishlist(item.id.toString())
+                          ? "Remove from Wishlist"
+                          : "Add to Wishlist"
+                      }
                     >
-                      <AiOutlineStar className="w-5 h-5" />
+                      <AiOutlineStar
+                        className={`w-5 h-5 ${
+                          isInWishlist(item.id.toString())
+                            ? "text-yellow-500 fill-yellow-500"
+                            : ""
+                        }`}
+                      />
                     </button>
                     {activeTooltip === `wishlist-${item.id}` && (
                       <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-3 mb-2 whitespace-nowrap z-20">
-                        Add to Wishlist
+                        {isInWishlist(item.id.toString())
+                          ? "Remove from Wishlist"
+                          : "Add to Wishlist"}
                         <span className="absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-black" />
                       </span>
                     )}
