@@ -3,7 +3,6 @@ import DailyDeals from "@/components/DailyDeals/DailyDeals";
 import Header from "@/components/Header/Header";
 import HeroSection from "@/components/Hero/Hero";
 import ProductSection from "@/components/Product/Product";
-// import Favorites from "@/pages/favorites";
 
 export default function Home() {
   return (
@@ -13,7 +12,6 @@ export default function Home() {
         <HeroSection />
         <ProductSection />
         <DailyDeals />
-        {/* <Favorites /> */}
       </Suspense>
     </main>
   );
