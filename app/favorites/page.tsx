@@ -42,7 +42,7 @@ export default function Favorites() {
                       height={800}
                       className="w-full h-auto transition-transform duration-1000 group-hover:scale-125"
                     />
-                    <div className="cursor-pointer absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="cursor-pointer absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
                       <div className="relative">
                         <button

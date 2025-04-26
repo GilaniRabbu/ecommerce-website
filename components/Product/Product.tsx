@@ -62,7 +62,7 @@ const Modal = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
       onClick={handleOutsideClick}
     >
       <div className="max-h-screen p-5 bg-white max-w-xl md:max-w-3xl w-full relative overflow-y-auto md:rounded-lg rounded-none">
@@ -286,7 +286,7 @@ const ProductSection = () => {
                   height={800}
                   className="w-full h-auto transition-transform duration-1000 group-hover:scale-125"
                 />
-                <div className="cursor-pointer absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="cursor-pointer absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
                   <div className="relative">
                     <button
