@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* Hide the spinner controls for Chrome, Safari, Edge, and Opera */
 .custom-num-input::-webkit-outer-spin-button,
