@@ -272,7 +272,7 @@ const ProductSection = () => {
           Our Newest Product Line
         </h1>
 
-        <div className="pt-10 px-4 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center justify-center gap-10 md:gap-8">
+        <div className="pt-10 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center justify-center gap-10 md:gap-8">
           {items.map((item) => (
             <div
               key={item.id}

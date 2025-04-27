@@ -306,7 +306,7 @@ const DailyDeals = () => {
   return (
     <main className="px-5 py-20">
       <section className="container mx-auto">
-        <div className="px-4 flex gap-4 flex-col md:flex-row items-center md:justify-between">
+        <div className="flex gap-4 flex-col md:flex-row items-center md:justify-between">
           <h1 className="text-center font-semibold text-2xl md:text-4xl">
             Deal Of The Day
           </h1>
@@ -325,7 +325,7 @@ const DailyDeals = () => {
           </div>
         </div>
 
-        <div className="pt-10 px-4 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center justify-center gap-10 md:gap-8">
+        <div className="pt-10 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center justify-center gap-10 md:gap-8">
           {items.map((item) => (
             <div
               key={item.id}

@@ -3,6 +3,7 @@ import DailyDeals from "@/components/DailyDeals/DailyDeals";
 import Header from "@/components/Header/Header";
 import HeroSection from "@/components/Hero/Hero";
 import ProductSection from "@/components/Product/Product";
+import Features from "@/components/Features/Features";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Header />
       <Suspense fallback={<div>Loading...</div>}>
         <HeroSection />
+        <Features />
         <ProductSection />
         <DailyDeals />
       </Suspense>
