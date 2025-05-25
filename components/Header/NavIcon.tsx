@@ -92,11 +92,11 @@ export default function NavIcon() {
             </svg>
           </Link>
         </li>
-        <li className="py-4 px-0 lg:px-2 md:px-1">
+        <li className="py-4 px-0 lg:px-2 md:px-1 relative">
           <Link
             href={""}
             onClick={() => togglePanel("cart")}
-            className="text-lg transition-all hover:text-teal-500 relative"
+            className="text-lg transition-all hover:text-teal-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +109,7 @@ export default function NavIcon() {
               />
             </svg>
             {cart.length > 0 && (
-              <span className="absolute -top-3 left-2 bg-teal-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+              <span className="absolute -top-8 left-2 bg-teal-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                 {cart.reduce((total, item) => total + item.quantity, 0)}
               </span>
             )}

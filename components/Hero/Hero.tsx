@@ -87,14 +87,14 @@ const HeroSection = () => {
 
       <style jsx>{`
         .custom-bullet {
-          background: linear-gradient(to right, #374151, #6b7280);
+          background: #6b7080;
           transition: all 50ms ease;
         }
         .custom-bullet:hover {
           transform: scale(1.1);
         }
         .custom-bullet.active {
-          background: linear-gradient(to right, #3b82f6, #0ea5e9);
+          background: #00bba7;
         }
       `}</style>
     </>
