@@ -139,7 +139,7 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 p-1 text-sm outline-none border border-gray-200"
+                className="flex-1 px-2 py-1 text-sm outline-none border border-gray-200"
               />
               <button className="px-3 py-1 bg-teal-700 hover:bg-teal-800 text-white">
                 Submit
