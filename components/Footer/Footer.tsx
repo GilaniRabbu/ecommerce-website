@@ -110,7 +110,7 @@ const Footer = () => {
                   href="#"
                   className="text-gray-600 hover:text-gray-900 text-sm"
                 >
-                  FAQ's
+                  FAQ&lsquo;s
                 </Link>
               </li>
               <li>
