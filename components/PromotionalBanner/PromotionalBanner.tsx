@@ -40,7 +40,7 @@ const PromotionalBanner = () => {
     },
   ];
   return (
-    <div className="w-full py-16 px-4">
+    <div className="w-full py-16 px-5">
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row gap-6">
           {promotionalData.map((item) => (

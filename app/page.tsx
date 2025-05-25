@@ -5,6 +5,7 @@ import HeroSection from "@/components/Hero/Hero";
 import ProductSection from "@/components/Product/Product";
 import Features from "@/components/Features/Features";
 import PromotionalBanner from "@/components/PromotionalBanner/PromotionalBanner";
+import Gallery from "@/components/Gallery/Gallery";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <Features />
         <ProductSection />
         <DailyDeals />
+        <Gallery />
       </Suspense>
     </main>
   );
