@@ -4,7 +4,7 @@ import Header from "@/components/Header/Header";
 import HeroSection from "@/components/Hero/Hero";
 import ProductSection from "@/components/Product/Product";
 import Features from "@/components/Features/Features";
-import Promotional from "@/components/Promotional/Promotional";
+import PromotionalBanner from "@/components/PromotionalBanner/PromotionalBanner";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
       <Suspense fallback={<div>Loading...</div>}>
         <HeroSection />
-        <Promotional />
+        <PromotionalBanner />
         <Features />
         <ProductSection />
         <DailyDeals />

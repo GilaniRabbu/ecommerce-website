@@ -1,7 +1,6 @@
-import Image from "next/image";
 import React from "react";
 
-const Promotional = () => {
+const PromotionalBanner = () => {
   const promotionalData = [
     {
       id: 1,
@@ -13,7 +12,7 @@ const Promotional = () => {
       titleColor: "text-teal-700",
       titleSecondColor: "text-stone-900",
       descriptionColor: "text-gray-600",
-      buttonStyle: "bg-black hover:bg-gray-800 text-white",
+      buttonStyle: "bg-black hover:bg-gray-900 text-white",
     },
     {
       id: 2,
@@ -25,7 +24,7 @@ const Promotional = () => {
       titleColor: "text-orange-400",
       titleSecondColor: "text-white",
       descriptionColor: "text-gray-300",
-      buttonStyle: "bg-white hover:bg-gray-300 text-black",
+      buttonStyle: "bg-white hover:bg-gray-200 text-black",
     },
     {
       id: 3,
@@ -37,23 +36,22 @@ const Promotional = () => {
       titleColor: "text-teal-700",
       titleSecondColor: "text-stone-900",
       descriptionColor: "text-gray-600",
-      buttonStyle: "bg-black hover:bg-gray-800 text-white",
+      buttonStyle: "bg-black hover:bg-gray-900 text-white",
     },
   ];
   return (
     <div className="w-full py-16 px-4">
       <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row gap-6">
+        <div className="flex flex-col lg:flex-row gap-6">
           {promotionalData.map((item) => (
             <div
               key={item.id}
-              className="flex-1 relative h-72 lg:h-64 overflow-hidden shadow-sm bg-cover bg-right"
+              className="flex-1 relative h-64 overflow-hidden shadow-sm bg-cover bg-right"
               style={{
                 backgroundImage: `url(${item.backgroundImage})`,
               }}
             >
-              {/* Content */}
-              <div className="relative z-10 p-8 h-full">
+              <div className="p-8 h-full">
                 <div>
                   <h2 className="text-3xl font-bold mb-2">
                     <span className={item.titleColor}>{item.title}</span>{" "}
@@ -79,4 +77,4 @@ const Promotional = () => {
   );
 };
 
-export default Promotional;
+export default PromotionalBanner;
