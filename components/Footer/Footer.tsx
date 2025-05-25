@@ -135,13 +135,13 @@ const Footer = () => {
           {/* Newsletters */}
           <div>
             <h3 className="font-semibold text-gray-900 mb-4">Newsletters</h3>
-            <div className="flex gap-2 mb-4">
+            <div className="flex flex-col gap-2 mb-4">
               <input
                 type="email"
                 placeholder="Enter your email"
                 className="flex-1 text-sm"
               />
-              <button className="bg-teal-700 hover:bg-teal-800 text-white px-4">
+              <button className="px-4 bg-teal-700 hover:bg-teal-800 text-white">
                 Submit
               </button>
             </div>
