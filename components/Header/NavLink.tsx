@@ -34,7 +34,7 @@ export default function NavLink() {
           {isDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </Link>
         {isDropdownOpen && (
-          <ul className="md:absolute static top-full left-0 bg-white w-full md:w-40 md:mt-0 mt-1 md:shadow-lg z-10">
+          <ul className="md:absolute static top-full left-0 border-t bg-white w-full md:w-40 md:mt-0 mt-1 md:shadow-lg z-10">
             {Dropdown.map((item) => (
               <li key={item.id}>
                 <Link
